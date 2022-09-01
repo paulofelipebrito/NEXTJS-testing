@@ -1,4 +1,10 @@
+const TWO_SECONDS = 2000; // constant defined at top of file
+
 it("completes the ticket purchase flow, starting not signed in", () => {
+  // wait two seconds to avoid revalidation being swallowed by SWR de-dupe time
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy.wait(TWO_SECONDS);
+
   // load shows page
   cy.task("db:reset").visit("/");
   cy.findByRole("button", { name: /shows/i }).click();
